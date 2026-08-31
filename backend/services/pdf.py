@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 from reportlab.lib import colors
@@ -10,6 +11,12 @@ from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, Tabl
 
 from backend.models.schemas import Proposta
 
+def output_dir() -> Path:
+    if os.environ.get("VERCEL"):
+        return Path("/tmp/propostas")
+    return Path("data/propostas")
+
+
 OUTPUT_DIR = Path("data/propostas")
 
 
@@ -18,8 +25,9 @@ def _money(value: float) -> str:
 
 
 def gerar_pdf(proposta: Proposta, filename: str) -> Path:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    path = OUTPUT_DIR / filename
+    dest = output_dir()
+    dest.mkdir(parents=True, exist_ok=True)
+    path = dest / filename
 
     styles = getSampleStyleSheet()
     title = ParagraphStyle(
