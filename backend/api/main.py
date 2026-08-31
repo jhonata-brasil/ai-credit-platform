@@ -61,6 +61,7 @@ def analyze_credit(payload: AnalyzeCreditRequest) -> AnalyzeCreditResponse:
         proposta=state.proposta,
         contexto_rag=state.contexto_rag or [],
         pdf_url=f"/api/v1/propostas/{pdf_name}",
+        cnpj_em_cache=state.cnpj_em_cache,
     )
 
 
