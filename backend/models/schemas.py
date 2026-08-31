@@ -85,3 +85,4 @@ class AnalyzeCreditResponse(BaseModel):
     proposta: Proposta | None = None
     contexto_rag: list[str] = []
     pdf_url: str | None = None
+    cnpj_em_cache: bool = False
