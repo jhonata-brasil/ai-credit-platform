@@ -4,7 +4,7 @@ from pathlib import Path
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-KNOWLEDGE_DIR = Path("docs/knowledge")
+KNOWLEDGE_DIR = Path(__file__).resolve().parents[2] / "docs" / "knowledge"
 
 
 def _read_documents() -> list[tuple[str, str]]:
