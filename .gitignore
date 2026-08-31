@@ -5,7 +5,7 @@ venv/
 __pycache__/
 *.pyc
 .chroma/
-data/chroma/
+data/cnpj-cache/
 *.pdf
 !docs/knowledge/**
 .DS_Store
