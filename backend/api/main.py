@@ -1,14 +1,19 @@
 from __future__ import annotations
 
+import os
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from pathlib import Path
-
 from backend.models.schemas import AnalyzeCreditRequest, AnalyzeCreditResponse
 from backend.services.pdf import gerar_pdf
 from backend.workflows.credit_workflow import CreditWorkflow, WorkflowState
+
+ROOT = Path(__file__).resolve().parents[2]
+PUBLIC_DIR = ROOT / "public"
+FRONTEND_DIR = ROOT / "frontend"
 
 app = FastAPI(
     title="Plataforma de Crédito IA",
@@ -69,5 +74,16 @@ def download_pdf(filename: str) -> FileResponse:
     return FileResponse(path, media_type="application/pdf", filename=filename)
 
 
-FRONTEND_DIR = Path(__file__).resolve().parents[2] / "frontend"
-app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
+def _static_dir() -> Path | None:
+    for candidate in (PUBLIC_DIR, FRONTEND_DIR):
+        if candidate.is_dir() and (candidate / "index.html").exists():
+            return candidate
+    return None
+
+
+# On Vercel, files in public/ are served by the CDN. Mounting "/" crashes
+# the function when the folder is not in the serverless bundle.
+if not os.environ.get("VERCEL"):
+    static_dir = _static_dir()
+    if static_dir is not None:
+        app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="frontend")
