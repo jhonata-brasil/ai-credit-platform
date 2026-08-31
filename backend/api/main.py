@@ -4,6 +4,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from pathlib import Path
+
 from backend.models.schemas import AnalyzeCreditRequest, AnalyzeCreditResponse
 from backend.services.pdf import gerar_pdf
 from backend.workflows.credit_workflow import CreditWorkflow, WorkflowState
@@ -59,12 +61,13 @@ def analyze_credit(payload: AnalyzeCreditRequest) -> AnalyzeCreditResponse:
 
 @app.get("/api/v1/propostas/{filename}")
 def download_pdf(filename: str) -> FileResponse:
-    from pathlib import Path
+    from backend.services.pdf import output_dir
 
-    path = Path("data/propostas") / filename
+    path = output_dir() / filename
     if not path.exists():
         raise HTTPException(status_code=404, detail="PDF não encontrado")
     return FileResponse(path, media_type="application/pdf", filename=filename)
 
 
-app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+FRONTEND_DIR = Path(__file__).resolve().parents[2] / "frontend"
+app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
