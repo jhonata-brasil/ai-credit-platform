@@ -4,14 +4,25 @@ from pathlib import Path
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-KNOWLEDGE_DIR = Path(__file__).resolve().parents[2] / "docs" / "knowledge"
+
+def _knowledge_dir() -> Path | None:
+    here = Path(__file__).resolve()
+    candidates = [
+        here.parents[2] / "docs" / "knowledge",
+        Path.cwd() / "docs" / "knowledge",
+    ]
+    for path in candidates:
+        if path.is_dir():
+            return path
+    return None
 
 
 def _read_documents() -> list[tuple[str, str]]:
     docs: list[tuple[str, str]] = []
-    if not KNOWLEDGE_DIR.exists():
+    knowledge = _knowledge_dir()
+    if knowledge is None:
         return docs
-    for path in KNOWLEDGE_DIR.rglob("*"):
+    for path in knowledge.rglob("*"):
         if path.suffix.lower() not in {".md", ".txt", ".mdx"}:
             continue
         docs.append((path.name, path.read_text(encoding="utf-8")))
