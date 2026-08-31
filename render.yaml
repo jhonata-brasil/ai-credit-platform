@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ai-credit-platform
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHONPATH
+        value: /app
