@@ -1,0 +1,15 @@
+.env
+.venv/
+.venv12/
+venv/
+__pycache__/
+*.pyc
+.chroma/
+data/chroma/
+*.pdf
+!docs/knowledge/**
+.DS_Store
+.idea/
+.vscode/
+node_modules/
+.pytest_cache/
