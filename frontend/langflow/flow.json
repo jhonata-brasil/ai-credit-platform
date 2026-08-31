@@ -1,0 +1,18 @@
+{
+  "nodes": [
+    { "id": "cnpj", "type": "input", "data": { "label": "CNPJ + faturamento + valor" } },
+    { "id": "receitaws", "type": "api", "data": { "label": "ReceitaWS" } },
+    { "id": "crew", "type": "crewai", "data": { "label": "CrewAI / agentes" } },
+    { "id": "graph", "type": "langgraph", "data": { "label": "LangGraph workflow" } },
+    { "id": "rag", "type": "rag", "data": { "label": "RAG Search" } },
+    { "id": "proposal", "type": "output", "data": { "label": "Proposta JSON + PDF" } }
+  ],
+  "edges": [
+    { "source": "cnpj", "target": "receitaws" },
+    { "source": "receitaws", "target": "crew" },
+    { "source": "crew", "target": "graph" },
+    { "source": "graph", "target": "rag" },
+    { "source": "rag", "target": "proposal" }
+  ],
+  "note": "Fluxo visual de referência. O uso público é o site em / (frontend)."
+}
