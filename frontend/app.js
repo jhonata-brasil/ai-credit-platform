@@ -51,6 +51,7 @@ form.addEventListener("submit", async (event) => {
     resultEl.innerHTML = `
       <h2>${e.razao_social}</h2>
       <p>${badge(a.risco, a.aprovado)} &nbsp; Score ${a.score}</p>
+      ${json.cnpj_em_cache ? "<p>CNPJ já estava salvo. Esta consulta usou os dados da consulta anterior.</p>" : "<p>CNPJ consultado agora e salvo para as próximas vezes.</p>"}
       <p>${a.motivo}</p>
       <h3>Empresa</h3>
       <dl class="kvs">
