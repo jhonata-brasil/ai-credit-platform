@@ -25,6 +25,7 @@ class WorkflowState:
     contexto_rag: list[str] | None = None
     proposta: Proposta | None = None
     revisao: list[str] | None = None
+    cnpj_em_cache: bool = False
 
 
 class CreditWorkflow:
@@ -38,7 +39,7 @@ class CreditWorkflow:
         self.reviewer = AgenteRevisor()
 
     def run(self, state: WorkflowState) -> WorkflowState:
-        state.empresa = self.cnpj_agent.executar(state.cnpj)
+        state.empresa, state.cnpj_em_cache = self.cnpj_agent.executar(state.cnpj)
         assert state.empresa is not None
         state.analise = self.credit_agent.executar(
             state.empresa,
