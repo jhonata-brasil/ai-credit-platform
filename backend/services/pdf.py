@@ -34,7 +34,7 @@ def gerar_pdf(proposta: Proposta, filename: str) -> Path:
         "TitleBR",
         parent=styles["Title"],
         fontSize=16,
-        textColor=colors.HexColor("#0F3D2E"),
+        textColor=colors.HexColor("#003641"),
         spaceAfter=12,
     )
     body = ParagraphStyle("BodyBR", parent=styles["Normal"], fontSize=10, leading=14)
@@ -83,7 +83,7 @@ def gerar_pdf(proposta: Proposta, filename: str) -> Path:
     table.setStyle(
         TableStyle(
             [
-                ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#0F3D2E")),
+                ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#00A859")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
                 ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
                 ("FONTSIZE", (0, 0), (-1, -1), 8),
