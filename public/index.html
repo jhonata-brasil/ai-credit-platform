@@ -4,51 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Análise de crédito e proposta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <main class="wrap">
-    <header>
-      <p class="eyebrow">Plataforma de crédito</p>
-      <h1>Análise de crédito e proposta comercial</h1>
-      <p class="lead">Informe o CNPJ e os dados do pedido. O sistema consulta a Receita, aplica as regras de crédito e gera a proposta em PDF.</p>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Plataforma de crédito</span>
+        </div>
+        <p class="topbar-note">Análise e proposta comercial</p>
+      </div>
     </header>
 
-    <form id="form" class="card">
-      <label>CNPJ
-        <input name="cnpj" inputmode="numeric" placeholder="00.000.000/0001-00" required />
-      </label>
-      <div class="grid">
-        <label>Valor solicitado (R$)
-          <input name="valor_solicitado" type="number" min="1" step="0.01" value="150000" required />
-        </label>
-        <label>Prazo (meses)
-          <input name="prazo" type="number" min="1" max="120" value="24" required />
-        </label>
-        <label>Faturamento mensal (R$)
-          <input name="faturamento_mensal" type="number" min="0" step="0.01" value="500000" required />
-        </label>
-      </div>
-      <label>Responsável legal
-        <input name="responsavel_legal" placeholder="Nome completo" />
-      </label>
-      <div class="grid">
-        <label>E-mail
-          <input name="email_contato" type="email" placeholder="contato@empresa.com" />
-        </label>
-        <label>Telefone
-          <input name="telefone_contato" placeholder="(11) 0000-0000" />
-        </label>
-      </div>
-      <label>Dados bancários
-        <input name="dados_bancarios" placeholder="Banco, agência e conta" />
-      </label>
-      <button type="submit" id="btn">Analisar e gerar proposta</button>
-      <p id="status" class="status" hidden></p>
-    </form>
+    <main class="wrap">
+      <section class="hero">
+        <p class="eyebrow">Consulta simples e objetiva</p>
+        <h1>Análise de crédito e proposta comercial</h1>
+        <p class="lead">Informe o CNPJ e os dados do pedido. O sistema consulta a Receita, aplica as regras de crédito e gera a proposta em PDF.</p>
+      </section>
 
-    <section id="result" class="result" hidden></section>
-  </main>
+      <form id="form" class="card">
+        <h2 class="card-title">Dados da consulta</h2>
+        <label>CNPJ
+          <input name="cnpj" inputmode="numeric" placeholder="00.000.000/0001-00" required />
+        </label>
+        <div class="grid">
+          <label>Valor solicitado (R$)
+            <input name="valor_solicitado" type="number" min="1" step="0.01" value="150000" required />
+          </label>
+          <label>Prazo (meses)
+            <input name="prazo" type="number" min="1" max="120" value="24" required />
+          </label>
+          <label>Faturamento mensal (R$)
+            <input name="faturamento_mensal" type="number" min="0" step="0.01" value="500000" required />
+          </label>
+        </div>
+        <label>Responsável legal
+          <input name="responsavel_legal" placeholder="Nome completo" />
+        </label>
+        <div class="grid two">
+          <label>E-mail
+            <input name="email_contato" type="email" placeholder="contato@empresa.com" />
+          </label>
+          <label>Telefone
+            <input name="telefone_contato" placeholder="(11) 0000-0000" />
+          </label>
+        </div>
+        <label>Dados bancários
+          <input name="dados_bancarios" placeholder="Banco, agência e conta" />
+        </label>
+        <button type="submit" id="btn">Analisar e gerar proposta</button>
+        <p id="status" class="status" hidden></p>
+      </form>
+
+      <section id="result" class="result" hidden></section>
+    </main>
+
+    <footer class="footer">
+      <p>Desenvolvido por Jhonata Nunes.</p>
+    </footer>
+  </div>
   <script src="/app.js"></script>
 </body>
 </html>
